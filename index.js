@@ -1,5 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const MongoUserRepository = require("./src/infrastructure/database/MongoUserRepository");
 const CreateUserUseCase = require("./src/application/use-cases/user/CreateUser");
@@ -13,7 +16,7 @@ app.use(express.json());
 
 // Connect to MongoDB
 mongoose
-  .connect("mongodb://localhost:27017/cleanarchdb")
+  .connect(process.env.MONGO_URL)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
